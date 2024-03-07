@@ -4,12 +4,26 @@ import "./index.css";
 
 import ErrorPage from "./error-page";
 import Root from "./routes/root";
+import SignUp from "./routes/signup";
+import LogIn from "./routes/login";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import firebaseConfig from "./firebaseConfig.js";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Root />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/signup",
+        element: <SignUp />,
+        errorElement: <ErrorPage />,
+    },
+    {
+        path: "/login",
+        element: <LogIn />,
         errorElement: <ErrorPage />,
     },
 ]);
