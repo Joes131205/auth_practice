@@ -8,7 +8,6 @@ import SignUp from "./routes/signup";
 import LogIn from "./routes/login";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import firebaseConfig from "./firebaseConfig.js";
 
 const router = createBrowserRouter([
     {
