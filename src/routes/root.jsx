@@ -1,23 +1,32 @@
-import { useEffect } from "react";
-import firebaseConfig from "../firebaseConfig.js";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 function Root() {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const auth = getAuth();
+    const [uid, setUid] = useState(null);
+
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                console.log(user);
+                setUid(user.uid);
             } else {
                 navigate("/signup");
             }
         });
     }, []);
+    function handleSignOut() {
+        signOut(auth).then(() => {
+            navigate("/login");
+        });
+    }
+
     return (
         <div>
             <h1>Root</h1>
+            <h1>Your user ID: {uid}</h1>
+            <button onClick={handleSignOut}>Log Out</button>
         </div>
     );
 }

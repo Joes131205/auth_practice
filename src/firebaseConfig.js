@@ -9,7 +9,6 @@ const firebaseConfig = {
         .VITE_REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
     appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
 };
-console.log(firebaseConfig.apiKey);
 const app = initializeApp(firebaseConfig);
 
 export default app;

@@ -4,7 +4,7 @@ import {
     onAuthStateChanged,
 } from "firebase/auth";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function SignUp() {
     const [data, setData] = useState({
@@ -71,6 +71,7 @@ function SignUp() {
                 />
                 <button type="submit">Sign Up</button>
             </form>
+            <Link to="/login">Log In</Link>
         </div>
     );
 }
