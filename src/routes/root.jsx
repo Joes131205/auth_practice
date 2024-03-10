@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import app from "../firebaseConfig";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
 function Root() {
@@ -21,12 +22,21 @@ function Root() {
             navigate("/login");
         });
     }
-
+    useEffect(() => {
+        document.title = "Home";
+    }, []);
     return (
-        <div>
-            <h1>Root</h1>
-            <h1>Your user ID: {uid}</h1>
-            <button onClick={handleSignOut}>Log Out</button>
+        <div className="bg-yale_blue-700 text-white h-screen flex flex-col items-center justify-center gap-10">
+            <h1 className="text-4xl font-bold">Hello!</h1>
+            <h1 className="text-2xl">
+                Your user ID: <b>{uid}</b>
+            </h1>
+            <button
+                onClick={handleSignOut}
+                className="px-10 py-2 bg-cambridge_blue-900 hover:bg-cambridge_blue-800 rounded-xl transition-colors text-white"
+            >
+                Log Out
+            </button>
         </div>
     );
 }
