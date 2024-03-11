@@ -13,9 +13,10 @@ function LogIn() {
         email: "",
         password: "",
     });
-
+    const [currError, setCurrError] = useState("");
     function handleSubmit(e) {
         e.preventDefault();
+        setCurrError("");
         const email = data.email;
         const password = data.password;
         signInWithEmailAndPassword(auth, email, password)
@@ -24,14 +25,24 @@ function LogIn() {
                 console.log(user);
             })
             .catch((error) => {
-                const errorMessage = error.message;
-                console.log(errorMessage);
+                const errorCode = error.code;
+
+                setCurrError(
+                    `Error: ${errorCode
+                        .replace("auth/", "")
+                        .split("-")
+                        .map(
+                            (item) =>
+                                item[0].toUpperCase() +
+                                item.slice(1).toLowerCase()
+                        )
+                        .join(" ")}`
+                );
             });
     }
     function handleChange(e) {
         const { name, value } = e.target;
         setData((prev) => ({ ...prev, [name]: value }));
-        console.log(data);
     }
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
@@ -73,7 +84,7 @@ function LogIn() {
                     Log In
                 </button>
             </form>
-
+            <p className="text-red-500">{currError}</p>
             <p>
                 Don't have an account?{" "}
                 <Link to="/signup" className="text-blue-500">

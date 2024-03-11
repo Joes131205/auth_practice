@@ -12,6 +12,7 @@ function SignUp() {
         password: "",
         confirmPassword: "",
     });
+    const [currError, setCurrError] = useState("");
     let navigate = useNavigate();
     const auth = getAuth();
     const handleSubmit = async (e) => {
@@ -25,8 +26,18 @@ function SignUp() {
                 })
                 .catch((error) => {
                     const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log(errorMessage);
+
+                    setCurrError(
+                        `Error: ${errorCode
+                            .replace("auth/", "")
+                            .split("-")
+                            .map(
+                                (item) =>
+                                    item[0].toUpperCase() +
+                                    item.slice(1).toLowerCase()
+                            )
+                            .join(" ")}`
+                    );
                 });
         } else {
             alert("Passwords do not match");
@@ -84,6 +95,7 @@ function SignUp() {
                     Sign Up
                 </button>
             </form>
+            <p className="text-red-500">{currError}</p>
             <p>
                 {" "}
                 Already have an account?{" "}

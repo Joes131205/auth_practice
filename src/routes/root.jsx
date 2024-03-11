@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import app from "../firebaseConfig";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -31,6 +31,7 @@ function Root() {
             <h1 className="text-2xl">
                 Your user ID: <b>{uid}</b>
             </h1>
+            <Link to="/setting">Setting</Link>
             <button
                 onClick={handleSignOut}
                 className="px-10 py-2 bg-cambridge_blue-900 hover:bg-cambridge_blue-800 rounded-xl transition-colors text-white"
